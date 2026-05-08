@@ -39,7 +39,6 @@ public class DealershipFileManager {
                 dealership.addVehicle(vehicle);
 
             }
-            //dealership.addVehicle(title);
 
             br.close();
         }
@@ -92,40 +91,30 @@ public class DealershipFileManager {
 
 
 
+    //this method should save the data
+    public void saveDealership(Dealership dealership){
+        //this will be reading from the dealership objects array
+        //then it will be adding them all to the file again.
 
+        try{
 
+            FileWriter fr = new FileWriter(file);
 
+            //header
+            fr.write(dealership.getName() + "|" + dealership.getAdress() + "|" + dealership.getPhone() + "\n" );
 
-//    //this method should save the data
-//    public void saveDealership(Dealership dealership){
-//        //this will be reading from the dealership objects array
-//        //then it will be adding them all to the file again.
-//
-////        try{
-////
-//////            FileWriter fr = new FileWriter("test.csv");
-////            FileWriter fr = new FileWriter(file);
-////
-////            fr.write(getDealership().getName() + "|" + getDealership().getAdress() + "|" + getDealership().getPhone() + "\n" );
-////
-////            for(Vehicle v : getDealership().getInventory()){
-////                fr.write(v.getVin() + "|" +
-////                        v.getYear() + "|" + v.getMake() + "|" + v.getModel()+ "|" + v.getVehicleType() + "|" + v.getColor() + "|" + v.getOdometer() + "|" + v.getPrice() + "\n");
-////            }
-////            fr.close();
-////
-////        }
-////        catch (IOException e){
-////            e.getMessage();
-////        }
-//        //for now i am simply printing inventory stuff.
-//
-//
-//        //I should be adding the title
-//
-//        //I should then be adding everything else to theat instance of vehicles.
-//
-//    }
+            for(Vehicle v : dealership.getInventory()){
+                fr.write(v.getVin() + "|" +
+                        v.getYear() + "|" + v.getMake() + "|" + v.getModel()+ "|" + v.getVehicleType() + "|" + v.getColor() + "|" + v.getOdometer() + "|" + v.getPrice() + "\n");
+            }
+            fr.close();
+
+        }
+        catch (IOException e){
+            e.getMessage();
+        }
+
+    }
 
 
 

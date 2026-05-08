@@ -4,6 +4,7 @@ import com.pluralsight.Dealership;
 import com.pluralsight.DealershipFileManager;
 import com.pluralsight.Vehicle;
 
+import java.lang.classfile.CodeModel;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +19,13 @@ public class UserInterface {
     //Dealership PriorityToyota = new Dealership()
 
     //this class will instantiate dealership
+
+
+
+    //____________________________________________________
+    //Get all the list options working and then work on add and remove
+    //vehicles
+    //---------------------------------------------------------
 
 
     private Dealership dealership;
@@ -62,36 +70,26 @@ public class UserInterface {
             switch(userInput){
 
                 case "1" :
-                    Console.promptForDouble("Enter you lowest price range: ");
-                    Console.promptForDouble("Enter you highest price range: ");
-                    //this method should take a range and return by the range
                     processGetByPriceRequest();
                     break;
 
                 case "2" :
-                    Console.promptForString("Enter the Make of the Car: ");
-                    Console.promptForString("Enter the Model of the Car: ");
                     processGetByMakeModelRequest();
                     break;
 
                 case "3" :
-                    Console.promptForInt("Enter you lowest Year range: ");
-                    Console.promptForInt("Enter you highest Year range: ");
                     processGetByYearRequest();
                     break;
+
                 case "4" :
-                    Console.promptForString("Enter the Color of the Vehicle: ");
                     processGetByColorRequest();
                     break;
 
                 case "5" :
-                    Console.promptForInt("Enter you lowest Mileage range: ");
-                    Console.promptForInt("Enter you highest Mileage range: ");
                     processGetByMileageRequest();
                     break;
 
                 case "6" :
-                    Console.promptForString("Enter the type (car, truck, SUV, van): ");
                     processGetByVehicleTypeRequest();
                     break;
 
@@ -140,45 +138,138 @@ public class UserInterface {
     }
 
 
-
+    /**
+     * this method should take a minimum and a maximum value
+     * and look into the arraylist and then return the
+     */
     public void processGetByPriceRequest(){
+        //10112|1993|Ford|Explorer|SUV|Red|525123|995.00
+        //so price would be index 7
+
+        double min = Console.promptForDouble("Enter you lowest price range: ");
+        double max = Console.promptForDouble("Enter you highest price range: ");
+
+        //I am using the displayVehicle method to display these vehicles.
+        displayVehicle(dealership.getVehicleByPrice(min, max));
+
+        //Vehicle{vin=37846, year=2001, make='Ford', model='Ranger', vehicleType='truck', color='Yellow', odometer=172544, price=1995.0}
+
 
     }
 
-    public void processGetByMakeModelRequest(){}
+
+    /**
+     * this method will be returning cars based on the make and model.
+     */
+    public void processGetByMakeModelRequest(){
+
+        String make = Console.promptForString("Enter the Make of the Car: ");
+        String model = Console.promptForString("Enter the Model of the Car: ");
+
+        displayVehicle(dealership.getVehiclesByMakeModel(make, model));
+
+    }
 
 
-    public void processGetByYearRequest(){}
+    public void processGetByYearRequest(){
 
-    public void processGetByColorRequest(){}
+        int lowYear = Console.promptForInt("Enter you lowest Year range: ");
+        int highYear = Console.promptForInt("Enter you highest Year range: ");
+
+        displayVehicle(dealership.getVehiclesByYear(lowYear, highYear));
+    }
+
+    public void processGetByColorRequest(){
+
+        String color = Console.promptForString("Enter the Color of the Vehicle: ");
+        displayVehicle(dealership.getVehiclesByColor(color));
+
+    }
 
 
-    public void processGetByMileageRequest(){}
+    public void processGetByMileageRequest(){
+
+        int minMile = Console.promptForInt("Enter you lowest Mileage range: ");
+        int maxMile = Console.promptForInt("Enter you highest Mileage range: ");
+        displayVehicle(dealership.getVehiclesByMileage(minMile, maxMile));
+    }
 
 
-    public void processGetByVehicleTypeRequest(){}
+    public void processGetByVehicleTypeRequest(){
+        String type = Console.promptForString("Enter the type (car, truck, SUV, van): ");
+        displayVehicle(dealership.getVehiclesByType(type));
+
+    }
 
 
-    public void processGetByAllVehiclesRequest(){}
+    public void processGetByAllVehiclesRequest(){
 
-    public void processAddVehicleRequest(){}
+        displayVehicle(dealership.getAllVehicles());
+    }
 
-    public void processRemoveVehicleRequest(){}
+
+
+
+    DealershipFileManager dlf = new DealershipFileManager();
+    //IMPORTANT NOTE: Don't forget to have your UserInterface use the
+    //DealershipFileManager to save the dealership each time the user adds or removes a
+    //vehicle
+    public void processAddVehicleRequest(){
+
+        //public Vehicle(int vin, int year,
+        // String make, String model, String vehicleType,
+        // String color, int odometer, double price)
+
+        int vin = Console.promptForInt("Enter the vin of the Vehicle: ");
+        int year = Console.promptForInt("Enter the Year of the vehicle: ");
+        String make = Console.promptForString("Enter the make of the Vehicle: ");
+        String model = Console.promptForString("Enter the model of the Vehicle: ");
+        String vehicleType = Console.promptForString("Enter the vehicleType of the Vehicle: ");
+        String color = Console.promptForString("Enter the color of the Vehicle: ");
+        int odometer = Console.promptForInt("Enter the Mileage of the vehicle: ");
+        double price = Console.promptForDouble("Enter the Price of the vehicle: ");
+
+        dealership.addVehicle(new Vehicle(vin, year, make, model, vehicleType, color, odometer, price));
+
+        //now I have to use the save vehicle method to save this.
+
+        dlf.saveDealership(dealership);
+
+    }
+
+
+
+    //IMPORTANT NOTE: Don't forget to have your UserInterface use the
+    //DealershipFileManager to save the dealership each time the user adds or removes a
+    //vehicle
+
+
+
+
+    public void processRemoveVehicleRequest(){
+
+        int vin = Console.promptForInt("Enter the vin of the Vehicle: ");
+        int year = Console.promptForInt("Enter the Year of the vehicle: ");
+        String make = Console.promptForString("Enter the make of the Vehicle: ");
+        String model = Console.promptForString("Enter the model of the Vehicle: ");
+        String vehicleType = Console.promptForString("Enter the vehicleType of the Vehicle: ");
+        String color = Console.promptForString("Enter the color of the Vehicle: ");
+        int odometer = Console.promptForInt("Enter the Mileage of the vehicle: ");
+        double price = Console.promptForDouble("Enter the Price of the vehicle: ");
+
+        dealership.removeVehicles(new Vehicle(vin, year, make, model, vehicleType, color, odometer, price));
+
+
+        dlf.saveDealership(dealership);
+    }
 
 
 
 
     public void processAllVehiclesRequest(){
 
-        //list all vehicles in the dealership
-
-        //call dealerships getAllVehicles()
-
-
         displayVehicle(dealership.getAllVehicles());
 
-
-        //displayVehicle method and pass in the getAll vehicle list
     }
 
 

@@ -54,30 +54,91 @@ public class Dealership {
 
 
 
-    public List<Vehicle> getVehicleByPrice(double min, double max){
-        return null;
+    public List<Vehicle> getVehicleByPrice(double min, double max)
+
+    {
+        List<Vehicle> priceRange = new ArrayList<>();
+        for(Vehicle v : inventory){
+            if((v.getPrice() <= max) && (v.getPrice() >= min)){
+                priceRange.add(v);
+            }
+        }
+        return priceRange;
     }
+
+
+
 
 
     public List<Vehicle> getVehiclesByMakeModel(String make, String model){
-        return null;
+
+        List<Vehicle> MakeModel = new ArrayList<>();
+        for(Vehicle v : inventory){
+            if((v.getMake().equalsIgnoreCase(make)) && (v.getModel().equalsIgnoreCase(model))){
+                MakeModel.add(v);
+            }
+        }
+        return MakeModel;
+
     }
 
-    public List<Vehicle> getVehiclesByYear(int year){
-        return null;
+
+
+    public List<Vehicle> getVehiclesByYear(int minYear, int maxYear)
+
+    {
+        List<Vehicle> yearRange = new ArrayList<>();
+        for(Vehicle v : inventory){
+            if((v.getYear() <= maxYear) && (v.getYear() >= minYear)){
+                yearRange.add(v);
+            }
+        }
+        return yearRange;
+
     }
 
     public List<Vehicle> getVehiclesByColor(String color){
-        return null;
+
+        List<Vehicle> colors = new ArrayList<>();
+        for(Vehicle v : inventory){
+            if(v.getColor().equalsIgnoreCase(color)){
+                colors.add(v);
+            }
+        }
+        return colors;
     }
 
 
-    public List<Vehicle> getVehiclesByMakeModel(int mileage){
-        return null;
+    /**
+     * this accounts for only less than the given mileage not a range
+     * @param lowestMileage
+     * @param highestMileage
+     * @return
+     */
+    public List<Vehicle> getVehiclesByMileage(int lowestMileage, int highestMileage){
+
+        List<Vehicle> miles = new ArrayList<>();
+        for(Vehicle v : inventory){
+            if((v.getOdometer() <= highestMileage) && (v.getOdometer() >= lowestMileage)){
+                miles.add(v);
+            }
+        }
+        return miles;
     }
 
-    public List<Vehicle> getVehiclesByMakeType(String make, String model){
-        return null;
+
+
+
+    public List<Vehicle> getVehiclesByType(String type){
+
+
+        List<Vehicle> types = new ArrayList<>();
+        for(Vehicle v : inventory){
+            if(v.getVehicleType().equalsIgnoreCase(type)){
+                types.add(v);
+            }
+        }
+        return types;
     }
 
 
@@ -90,13 +151,33 @@ public class Dealership {
 
     //add functionality
     public void addVehicle(Vehicle vehicle){
+
         inventory.add(vehicle);
     }
 
-    public void removeVehicles(){
+
+
+
+
+
+    public void removeVehicles(Vehicle vehicle){
+
+        for(Vehicle v: inventory){
+            if(vehicle.getVin() == v.getVin() &&
+                    vehicle.getYear() == v.getYear() &&
+                    vehicle.getMake().equalsIgnoreCase(v.getMake()) &&
+                    vehicle.getModel().equalsIgnoreCase(v.getModel()) &&
+                    vehicle.getVehicleType().equalsIgnoreCase(v.getVehicleType()) &&
+                    vehicle.getColor().equalsIgnoreCase(v.getColor()) &&
+                    vehicle.getOdometer() == v.getOdometer() &&
+                    vehicle.getPrice() == v.getPrice())
+            {
+                inventory.remove(v);
+                break;
+            }
+        }
 
     }
-
 
 
 }
