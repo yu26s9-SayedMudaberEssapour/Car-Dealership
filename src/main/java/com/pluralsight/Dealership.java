@@ -15,14 +15,16 @@ public class Dealership {
     private String phone;
 
     //this arraylist will keep track of vehicles
-    ArrayList<Vehicle> inventory;
+    ArrayList<Vehicle> inventory = new ArrayList<>();
 
+    public ArrayList<Vehicle> getInventory() {
+        return inventory;
+    }
 
-    public Dealership(String name, String adress, String phone, ArrayList<Vehicle> inventory) {
+    public Dealership(String name, String adress, String phone) {
         this.name = name;
         this.adress = adress;
         this.phone = phone;
-        this.inventory = inventory;
     }
 
     public String getName() {
@@ -87,11 +89,14 @@ public class Dealership {
 
 
     //add functionality
-    public void addVehicles(Vehicle vehicle){
+    public void addVehicle(Vehicle vehicle){
         inventory.add(vehicle);
     }
 
     public void removeVehicles(){
 
     }
+
+
+
 }

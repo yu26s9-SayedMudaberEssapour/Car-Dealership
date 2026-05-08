@@ -9,5 +9,15 @@ public class Main {
         //then creating the user interface and getting it started.
 
 
+        DealershipFileManager dlf = new DealershipFileManager();
+
+        Dealership d = dlf.getDealership();
+
+        dlf.saveDealership(d);
+        System.out.println(d.getName());
+        //dlf.saveDealership();
+        //dlf.saveDealership();
+
+
     }
 }
