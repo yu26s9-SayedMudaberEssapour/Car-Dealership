@@ -30,7 +30,6 @@ public class UserInterface {
 
     private Dealership dealership;
 
-    public UserInterface(){}
 
 
 
@@ -62,12 +61,10 @@ public class UserInterface {
                 8 - Add a vehicle
                 9 - Remove a vehicle
                 99 - Quit \n
-               
                 """);
-
             userInput = Console.promptForString("Your Response: ");
 
-            switch(userInput){
+            switch(userInput.toLowerCase()){
 
                 case "1" :
                     processGetByPriceRequest();
@@ -118,10 +115,6 @@ public class UserInterface {
         while(!userInput.equalsIgnoreCase("99"));
 
 
-        //here I am reading the user's command
-
-        //creating a switch statement that calls each of the methods that matches
-        //users command
     }
 
 
@@ -129,11 +122,13 @@ public class UserInterface {
     private void displayVehicle(List vehicle){
 
         //I should be displaying vehicles here
-
-
+        int count = 1;
+        System.out.println("(-------------------------------------------------------Vehicles--------------------------------------------------------------)");
         for(Object v: vehicle){
-            System.out.println(v);
+            System.out.println(count + ": " + v.toString());
+            count += 1;
         }
+        System.out.println("(-------------------------------------------------------End of Vehicles--------------------------------------------------------------)");
 
     }
 
@@ -143,8 +138,6 @@ public class UserInterface {
      * and look into the arraylist and then return the
      */
     public void processGetByPriceRequest(){
-        //10112|1993|Ford|Explorer|SUV|Red|525123|995.00
-        //so price would be index 7
 
         double min = Console.promptForDouble("Enter you lowest price range: ");
         double max = Console.promptForDouble("Enter you highest price range: ");
@@ -271,6 +264,8 @@ public class UserInterface {
         displayVehicle(dealership.getAllVehicles());
 
     }
+
+
 
 
 }

@@ -155,11 +155,6 @@ public class Dealership {
         inventory.add(vehicle);
     }
 
-
-
-
-
-
     public void removeVehicles(Vehicle vehicle){
 
         for(Vehicle v: inventory){
