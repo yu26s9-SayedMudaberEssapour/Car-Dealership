@@ -121,15 +121,15 @@ Database integration
 Vehicle update/edit functionality
 How to Run the Application
 Clone the repository:
-git clone https://github.com/yourusername/your-repo-name.git
+git clone https://github.com/yu26s9-SayedMudaberEssapour/Car-Dealership
 Open the project in IntelliJ or another Java IDE
 Run the Program.java file
 GitHub Repository
 
 Add your GitHub repository link here:
 
-https://github.com/yourusername/your-repo-name
-Author
+[https://github.com/yourusername/your-repo-name](https://github.com/yu26s9-SayedMudaberEssapour/Car-Dealership)
 
+Author
 Sayed Essapour
 Student at Year Up United
